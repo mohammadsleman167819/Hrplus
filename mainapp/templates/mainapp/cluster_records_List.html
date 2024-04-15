@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block page-title%}
+  Cluster Model Records
+{% endblock%}
+{% block content %}
+
+<div class="table-responsive-sm">
+<table style="width: 99%;" class="text-center mx-auto table mt-5 table-drak table-striped border-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Silhouette Score</th>
+      <th scope="col">Calinski Harabasz Score</th>
+      <th scope="col">Number Of Clusters</th>
+      <th scope="col">Total Records</th>
+      <th scope="col">Word2vec word min-count</th>
+      <th scope="col">Word2vec window size</th>
+      <th scope="col">Word2vec vector size</th>
+      <th scope="col">Added Date</th>
+      <th scope="col">Applied</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if cluster_records_list %}
+      {% for record in cluster_records_list %}
+
+    <tr>
+      <th scope="row">{{record.id}}</th>
+      <td>{{record.silhouette_score}}</td>
+      <td>{{record.calinski_harabasz_score}}</td>
+      <td>{{record.number_of_clusters}}</td>
+      <td>{{record.total_records}}</td>
+      <td>{{record.word2vec_word_min_count}}</td>
+      <td>{{record.word2vec_window_size}}</td>
+      <td>{{record.word2vec_vector_size}}</td>
+      <td>{{record.added_date}}</td>
+      <td>
+      {%if record.applied%}
+        Yes
+      {%else%}
+        No
+      {%endif%}
+      </td>
+    
+    </tr>
+    {% endfor %}
+  {% endif %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

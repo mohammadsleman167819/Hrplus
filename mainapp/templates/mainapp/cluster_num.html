@@ -1,0 +1,129 @@
+{% extends "base_generic.html" %}
+
+{% block page-title%}
+  Test Different Number of clusters
+{% endblock%}
+
+{% block content %}
+{% if running %}
+<h1 class="ms-5 mt-5">  
+  Another training Request is Running Come back in  a few minutes
+</h1>
+
+{% else %}
+
+
+
+<form action="{% url 'test_clusters_number' %}" method="post" class=" mx-0 row gx-3 gy-4 mt-3">
+  {% csrf_token %}
+  <div class="col-4">
+    <label for="start_number" class="form-label">{{ form.start_number.label}}</label>
+    {{ form.start_number }}
+  </div>
+  <div class="col-4">
+    <label for="end_number" class="form-label">{{ form.end_number.label}}</label>
+    {{ form.end_number }}
+  </div>
+  
+  <div class="col-4">
+    <label for="step" class="form-label">{{ form.step.label}}</label>
+    {{ form.step }}
+  </div>
+  
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.word2vec_vector_size.label}}</label>
+    {{ form.word2vec_vector_size}}
+    {{ form.word2vec_vector_size.help_text}}
+  </div>
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.word2vec_window_size.label}}</label>
+    {{ form.word2vec_window_size}}
+    {{ form.word2vec_window_size.help_text}}
+  </div>
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.word2vec_word_min_count.label}}</label>
+    {{ form.word2vec_word_min_count}}
+    <h6 class="mt-2 ms-2 mb-4">{{ form.word2vec_word_min_count.help_text}}</h6>
+  </div>
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.start_date.label_tag }}</label>
+    {{ form.start_date }}
+    <h6 class="mt-2 ms-2 mb-4">{{ form.start_date.help_text }}</h6>
+  </div>
+  {% if form.errors %}
+  <div class="alert alert-danger" role="alert">
+    There were some errors in your form:
+    <ul>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ field.label }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+  <div class="col-12 d-flex align-items-center justify-content-center mb-4">
+      <button type="submit" class="btn btn-primary btn-lg me-5">Test</button>  
+      <a  href="{% url 'model_results' %}" class="btn btn-lg btn-danger">Close</a>
+  </div>
+
+  </form>
+
+
+
+<div class="table-responsive-sm">
+<table style="width: 99%;" class="text-center mx-auto table mt-5 table-drak table-striped border-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Silhouette Score</th>
+      <th scope="col">Calinski Harabasz Score</th>
+      <th scope="col">Number Of Clusters</th>
+      <th scope="col">Total Records</th>
+      <th scope="col">Word2vec word min-count</th>
+      <th scope="col">Word2vec window size</th>
+      <th scope="col">Word2vec vector size</th>
+      <th scope="col">Start Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if results %}
+      {% for record in results %}
+
+    <tr>
+      <th scope="row">{{record.id}}</th>
+      {% if record.silhouette_score >= 0.24%}
+      <td style="color: green;font-weight: bolder;">
+        {{record.silhouette_score}}
+      </td>
+      {%elif record.silhouette_score < 0.15%}
+      <td style="color: red;font-weight: bolder;">
+        {{record.silhouette_score}}
+      </td>
+      {%else%}
+      <td style="color: orange;font-weight: bolder;">
+        {{record.silhouette_score}}
+      </td>
+      {%endif%}
+      <td>{{record.calinski_harabasz_score}}</td>
+      <td>{{record.number_of_clusters}}</td>
+      <td>{{record.total_records}}</td>
+      <td>{{record.word2vec_word_min_count}}</td>
+      <td>{{record.word2vec_window_size}}</td>
+      <td>{{record.word2vec_vector_size}}</td>
+      <td>{{record.from_date}}</td>
+    </tr>
+    {% endfor %}
+  {% endif %}
+  </tbody>
+</table>
+
+{%if graph%}    
+<div class="mx-auto">
+<img src="../../static/Images/test_plot.png">
+</div>
+{%endif%}
+</div>
+{%endif%}
+{% endblock %}
