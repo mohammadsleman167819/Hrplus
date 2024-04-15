@@ -1,0 +1,69 @@
+{% extends "base_generic.html" %}
+
+
+
+{%block page-title%}
+  Train Model
+{%endblock%}
+
+{% block content %}
+{% if running %}
+<h1 class="ms-5 mt-5">  
+  Another training Request is Running Come back in  a few minutes
+</h1>
+
+{% else %}
+
+<form action="{% url 'train_model' %}" method="post" class=" mx-0 row gx-3 gy-4 mt-3">
+  {% csrf_token %}
+  <div class="col-6">
+    <label for="number_of_clusters" class="form-label">{{ form.number_of_clusters.label}}</label>
+    {{ form.number_of_clusters }}
+    <p>{{ form.number_of_clusters.help_text }}</p>
+  </div>
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.word2vec_vector_size.label}}</label>
+    {{ form.word2vec_vector_size}}
+    {{ form.word2vec_vector_size.help_text}}
+  </div>
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.word2vec_window_size.label}}</label>
+    {{ form.word2vec_window_size}}
+    {{ form.word2vec_window_size.help_text}}
+  </div>
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.word2vec_word_min_count.label}}</label>
+    {{ form.word2vec_word_min_count}}
+    <h6 class="mt-2 ms-2 mb-4">{{ form.word2vec_word_min_count.help_text}}</h6>
+  </div>
+  <div class="col-6">
+    <label for="word2vec_vector_size" class="form-label">{{ form.start_date.label_tag }}</label>
+    {{ form.start_date }}
+    <h6 class="mt-2 ms-2 mb-4">{{ form.start_date.help_text }}</h6>
+  </div>
+  {% if form.errors %}
+  <div class="alert alert-danger" role="alert">
+    There were some errors in your form:
+    <ul>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ field.label }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+  <div class="col-12 d-flex align-items-center justify-content-center mb-4">
+      <button type="submit" class="btn btn-primary btn-lg me-5">Train</button>  
+      <a  href="{% url 'model_results' %}" class="btn btn-lg btn-danger me-5">Close</a>
+      <a  href="{% url 'test_clusters_number' %}" class="btn btn-lg btn-warning">Test for a range of number of clusters</a>
+  
+    </div>
+
+  </form>
+
+{%endif%}
+{% endblock %} 
+
+  

@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{%block page-title%}
+  Edit Company Details
+{%endblock%}
+
+{% block content %}
+<form action="" method="post" class=" mx-0 row gx-3 gy-4 mt-3">
+  {% csrf_token %}
+  <div class="col-12">
+    <label for="name" class="form-label">{{form.name.label}}</label>
+    {{form.name}}
+  </div>
+  <div class="col-12">
+    <label for="city" class="form-label">{{form.city.label}}</label>
+    {{form.city}}
+  </div>
+  <div class="col-12">
+    <label for="phone" class="form-label">{{form.phone.label}}</label>
+    {{form.phone}}
+  </div>
+  <div class="col-12 d-flex align-items-center justify-content-center">
+    <button type="submit" class="btn btn-primary btn-lg me-3">Done</button>
+    <a  href="{% url 'company-detail' user.id%}" class="btn btn-lg btn-danger">Close</a>
+  </div>
+</form>
+{% endblock %}
+ 

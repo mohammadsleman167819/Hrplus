@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block page-title%}
+  Employees
+{% endblock%}
+{% block content %}
+  {% if Employee_list %}
+  <div class="row row-cols-1 row-cols-md-2 g-4 " style="margin: 20px;">  
+    {% for emp in Employee_list %} 
+    <div class="col">
+      <div class="card h-100" style="max-width: 45rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ emp.firstname }} {{ emp.lastname }}</h5>
+          <p class="card-text mt-4">{{emp.skills |truncatechars:200}}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{{ emp.get_absolute_url }}" class="btn btn-primary">Details..</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {%else%}
+      <p>No avavilble Employees right now</p>
+  {%endif%}
+{% endblock %}

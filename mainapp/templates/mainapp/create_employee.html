@@ -1,0 +1,81 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form action="" method="post" class=" mx-0 row gx-3 gy-4 mt-3">
+  {% csrf_token %}
+  <div class="col-6">
+    <label for="firstname" class="form-label">{{form.firstname.label}} <span style="color: red; font-weight: bolder;">*</span></label>
+    {{form.firstname}}
+    {{form.firstname.errors}}
+  </div>
+  <div class="col-6">
+    <label for="lastname" class="form-label">{{form.lastname.label}} <span style="color: red; font-weight: bolder;">*</span></label>
+    {{form.lastname}} 
+    {{form.lastname.errors}}
+  </div>
+  <div class="col-6">
+    <label for="dateOfBirth" class="form-label">{{form.dateOfBirth.label}} <span style="color: red; font-weight: bolder;">*</span></label>
+    {{form.dateOfBirth}}
+    {{form.dateOfBirth.errors}}
+
+  </div>
+  <div class="col-6">
+    <label for="gender" class="form-label">{{form.gender.label}} <span style="color: red; font-weight: bolder;">*</span></label>
+    {{form.gender}} 
+    {{form.gender.errors}}
+
+  </div>
+  
+  <div class="col-6">
+    <label for="city" class="form-label">{{form.city.label}}  <span style="color: red; font-weight: bolder;">*</span></label>
+    {{form.city}} 
+    {{form.city.errors}}
+
+  </div>
+  <div class="col-6">
+    <label for="phone" class="form-label">{{form.phone.label}}  <span style="color: red; font-weight: bolder;">*</span></label>
+    {{form.phone}} 
+    {{form.phone.errors}}
+  </div>
+  
+  <div class="col-12">
+    <label for="education" class="form-label">{{form.education.label}}</label>
+    {{form.education}}
+    {{form.education.errors}}
+  </div>
+  <div class="col-12">
+    <label for="experience" class="form-label">{{form.experience.label}}</label>
+    {{form.experience}}
+    {{form.experience.errors}}
+  </div>
+
+  <div class="col-12">
+    <label for="awards" class="form-label">{{form.awards.label}}</label>
+    {{form.awards}}
+    {{form.awards.errors}}
+  </div>
+  <div class="col-12">
+    <label for="hobbies" class="form-label">{{form.hobbies.label}}</label>
+    {{form.hobbies}}
+    {{form.hobbies.errors}}
+  </div>
+  <div class="col-12">
+    <label for="skills" class="form-label">{{form.skills.label}}  <span style="color: red; font-weight: bolder;">*</span></label>
+    {{form.skills}} 
+    {{form.skills.errors}}
+  </div>
+  <div class="col-12">
+    <label for="references" class="form-label">{{form.references.label}}</label>
+    {{form.references}}
+    {{form.references.errors}}
+  </div>
+  <div class="col-12">
+    <label for="other" class="form-label">{{form.other.label}}</label>
+    {{form.other}}
+    {{form.other.errors}}
+  </div>
+  <div class="col-12 d-flex align-items-center justify-content-center mb-5">
+    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+  </div>
+</form>
+{% endblock %} 

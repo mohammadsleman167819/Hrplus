@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form action="" method="post" class=" mx-0 row gx-3 gy-4 mt-3">
+  {% csrf_token %}
+  <div class="col-12">
+    <label for="courseTitle" class="form-label">{{form.courseTitle.label}}</label>
+    {{form.courseTitle}}
+  </div>
+  <div class="col-12">
+    <label for="description" class="form-label">{{form.description.label}}</label>
+    {{form.description}}
+  </div>
+  <div class="col-12">
+    <label for="link" class="form-label">{{form.link.label}}</label>
+    {{form.link}}
+  </div>
+  <div class="col-12 d-flex align-items-center justify-content-center mb-5">
+      <button type="submit" class="btn btn-primary btn-lg me-3">Done</button>  
+      <a  href="{% url 'mycourses' %}" class="btn btn-lg btn-danger">Close</a>
+  </div>
+
+  </form>
+{% endblock %} 

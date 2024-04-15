@@ -1,0 +1,47 @@
+ 
+
+{% extends "base_generic.html" %}
+
+{%block page-title%}
+  Course Details
+{%endblock%}
+
+{% block content %}
+<div class="list-group ms-4 w-75 mb-3" style="overflow-wrap: break-word;">
+       <div class="list-group-item mb-2" style="border-width:10px;">
+         <div class="d-flex w-100 pt-3 ps-3"style=" border-bottom: 2px black solid;">
+           <h5 class="mb-3" >Course Title</h5>
+         </div>
+         <p class="mb-1 p-3" >{{ Course.courseTitle }}</p>
+       </div>
+       <div class="list-group-item mb-2" style="border-width:10px;">
+              <div class="d-flex w-100 pt-3 ps-3"style=" border-bottom: 2px black solid;">
+                <h5 class="mb-3" >Course Description</h5>
+              </div>
+              <p class="mb-1 p-3" >{{Course.description}}</p>
+        </div>  
+        <div class="list-group-item mb-2" style="border-width:10px;">
+              <div class="d-flex w-100 pt-3 ps-3"style=" border-bottom: 2px black solid;">
+                <h5 class="mb-3" >link</h5>
+              </div>
+              <p class="mb-1 p-3" >{{Course.link}}</p>
+        </div>  
+        <div class="list-group-item mb-2" style="border-width:10px;">
+          <div class="d-flex w-100 pt-3 ps-3"style=" border-bottom: 2px black solid;">
+            <h5 class="mb-3" >Suggested By</h5>
+          </div>
+          <p class="mb-1 p-3" ><a href="{{Course.company_id.get_absolute_url}}"> {{ Course.company_id }}</a></p>
+    </div>
+</div>  
+
+  {% if Course.company_id_id == user.id%}
+    <div class="mt-3 mb-3 w-75">
+      <div style="margin-left:40% ;">
+      <a href="{% url 'course-update' Course.course_id%}" class="btn btn-primary me-3">Update</a>  
+      <a href="{% url 'course-delete' Course.course_id%}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  {% endif %}
+         
+{% endblock %}
+  
